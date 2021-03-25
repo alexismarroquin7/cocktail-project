@@ -23,7 +23,7 @@ const Drinks = (props) => {
     const classes = useStyles();
     
     useEffect(() => {
-        fetchDrinks("margarita")
+        fetchDrinks(`margarita`);
     }, [fetchDrinks]);
 
     return (
