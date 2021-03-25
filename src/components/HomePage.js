@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 })
   
 
-const HomePage = props => {
+const HomePage = () => {
     
     const { push } = useHistory();
     const classes = useStyles();
