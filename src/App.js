@@ -4,15 +4,16 @@ import { Switch, Route } from "react-router-dom";
 //components
 import SearchPage from "./components/SearchPage";
 import HomePage from "./components/HomePage";
+import DrinkDetailed from "./components/DrinkDetailed";
 
 //style
-import {Grid, makeStyles} from "@material-ui/core"
+import { Grid, makeStyles } from "@material-ui/core"
 
 const useStyles = makeStyles({
   root: {
     fontFamily: 'roboto, sans-serif'
   }
-})
+});
 
 function App() {
 
@@ -28,7 +29,8 @@ function App() {
     >
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/search" component={SearchPage}/>
+        <Route path="/search/:id" component={DrinkDetailed} />
+        <Route path="/search" component={SearchPage} />
       </Switch>
     </Grid>
   );

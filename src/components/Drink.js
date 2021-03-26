@@ -1,5 +1,10 @@
-import React from "react"
-import { Typography, Card, CardActionArea, CardContent, makeStyles } from "@material-ui/core"
+import React from "react";
+
+//router
+import { Link } from "react-router-dom";
+
+//style
+import { Typography, Card, CardActionArea, CardContent, CardActions, Button, Grid, makeStyles } from "@material-ui/core"
 
 const useStyles = makeStyles({
     card: {
@@ -13,25 +18,36 @@ const useStyles = makeStyles({
     },
     drinkImage: {
         width: "230px"
+    },
+    link: {
+        color: "black",
+        textDecoration: "none"
     }
 })
 
 const Drink = ({ drink }) => {
 
-    const {strDrink, strDrinkThumb, strAlcoholic, strGlass} = drink;
+    const { idDrink, strDrink, strDrinkThumb, strAlcoholic, strGlass } = drink;
 
     const classes = useStyles();
 
     return (
     <Card className={classes.card}>
-    <CardActionArea className={classes.cardActionArea}>
-        <img className={classes.drinkImage} alt={strDrink} title={strDrink} src={strDrinkThumb}/>
-    </CardActionArea>
-    <CardContent>
-    <Typography>{strDrink}</Typography>
-    <Typography>{strAlcoholic}</Typography>
-    <Typography>Glass: {strGlass}</Typography>
-    </CardContent>
+        <CardActionArea className={classes.cardActionArea}>
+            <img className={classes.drinkImage} alt={strDrink} title={strDrink} src={strDrinkThumb}/>
+        </CardActionArea>
+        <CardContent>
+            <Typography>{strDrink}</Typography>
+            <Typography>{strAlcoholic}</Typography>
+            <Typography>Glass: {strGlass}</Typography>
+        </CardContent>
+        <CardActions>
+            <Grid container direction="column" alignItems="center">
+                <Link className={classes.link} to={`/search/${idDrink}`}>
+                <Button>Details</Button>
+                </Link>
+            </Grid>
+        </CardActions>
     </Card>
     )
 }
