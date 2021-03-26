@@ -3,6 +3,7 @@ import {FETCH_DRINKS_START, FETCH_DRINKS_SUCCESS, FETCH_DRINKS_FAIL} from "../ac
 const initialState = {
     drinkName: '',
     drinks: [],
+    ingredients: [],
     isLoading: false,
     error: ''
 }

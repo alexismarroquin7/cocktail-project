@@ -1,65 +1,87 @@
 import React, { useEffect } from "react";
 
 //route
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 //store
 import { connect } from "react-redux";
 import { fetchDrink } from "../store/actions";
 
+//components
+import LoadingDrinkDetailed from "./LoadingDrinkDetailed";
+import Ingredients from "./Ingredients"
+
+//hooks
+import { useWindowSize } from "../hooks/useWindowSize";
+
 //style
-import { Grid, CardActionArea, CardContent, Card, Typography } from "@material-ui/core";
+import { Grid, CardActionArea, CardContent, Card, Typography, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+    cardActionArea: {
+        padding: "0"
+    },
+    cardActionAreaLg: {
+        paddingTop: "5rem",
+        display: "flex",
+        flexFlow: "column wrap",
+        justifyContent: "center"
+    },
+    img: {
+        width: "350px",
+        borderColor: "black"
+    },
+    imgLg: {
+        width: "550px"
+    }
+});
 
 const DrinkDetailed = props => {
     
     const { fetchDrink, drink, isLoading } = props;
     const { id } = useParams();
+    const size = useWindowSize();
+    const classes = useStyles();
 
     useEffect(() => {
         fetchDrink(id);
     }, [fetchDrink]);
 
+
+
     return (
     <>
+    <Grid container direction="column" alignItems="center">
     <Card>
-        <Grid container direction="row" alignItems="center">
-
         {isLoading 
-        
-        ? (<CardContent>
-            <Typography variant="h5">Loading Drink...</Typography>
-            </CardContent>)
+        ? (<LoadingDrinkDetailed />)
         
         : drink.map(item => (
             <>
-            <CardActionArea>
-                <img src={item.strDrinkThumb} alt={item.strDrink} width="400px"/>
+            <Grid key={id} container direction="row" justify="center" alignItems="center">
+            <CardActionArea className={size.width < 500 ? classes.cardActionArea : classes.cardActionAreaLg}>
+                <img src={item.strDrinkThumb} alt={item.strDrink} className={size.width < 500 ? classes.img : classes.imgLg}/>
             </CardActionArea>
             <CardContent>
-                <Typography>{item.strDrink}</Typography>
-                <Typography>{item.strAlcoholic}</Typography>
-                <Typography>Ingredients:</Typography>
-                {item.strIngredient1 !== null && item.strIngredient1 !== '' && <Typography>- {item.strIngredient1}</Typography>}
-                {item.strIngredient2 !== null && item.strIngredient2 !== '' && <Typography>- {item.strIngredient2}</Typography>}
-                {item.strIngredient3 !== null && item.strIngredient3 !== '' && <Typography>- {item.strIngredient3}</Typography>}
-                {item.strIngredient4 !== null && item.strIngredient4 !== '' && <Typography>- {item.strIngredient4}</Typography>}
-                {item.strIngredient5 !== null && item.strIngredient5 !== '' && <Typography>- {item.strIngredient5}</Typography>}
-                {item.strIngredient6 !== null && item.strIngredient6 !== '' && <Typography>- {item.strIngredient6}</Typography>}
-                {item.strIngredient7 !== null && item.strIngredient7 !== '' && <Typography>- {item.strIngredient7}</Typography>}
-                {item.strIngredient8 !== null && item.strIngredient8 !== '' && <Typography>- {item.strIngredient8}</Typography>}
-                {item.strIngredient9 !== null && item.strIngredient9 !== '' && <Typography>- {item.strIngredient9}</Typography>}
-                {item.strIngredient10 !== null && item.strIngredient10 !== '' && <Typography>- {item.strIngredient10}</Typography>}
-                {item.strIngredient11 !== null && item.strIngredient11 !== '' && <Typography>- {item.strIngredient11}</Typography>}
-                {item.strIngredient12 !== null && item.strIngredient12 !== '' && <Typography>- {item.strIngredient12}</Typography>}
-                {item.strIngredient13 !== null && item.strIngredient13 !== '' && <Typography>- {item.strIngredient13}</Typography>}
-                {item.strIngredient14 !== null && item.strIngredient14 !== '' && <Typography>- {item.strIngredient14}</Typography>}
-                {item.strIngredient15 !== null && item.strIngredient15 !== '' && <Typography>- {item.strIngredient15}</Typography>}
+                <Grid>
+                    <Typography variant="h5">{item.strDrink}</Typography>
+                    <Typography>{item.strAlcoholic}</Typography>
+                    <Ingredients ingredients={[
+                        item.strIngredient1, item.strIngredient2, item.strIngredient3, item.strIngredient4, item.strIngredient5,
+                        item.strIngredient6, item.strIngredient7, item.strIngredient8, item.strIngredient9, item.strIngredient10,
+                        item.strIngredient11, item.strIngredient12, item.strIngredient13, item.strIngredient14, item.strIngredient15
+                    ]}/>
+                </Grid>
+                <Grid>
+                    <Typography variant="h6">Instructions:</Typography>
+                    <Typography>{item.strInstructions}</Typography>
+                </Grid>
             </CardContent>
+            </Grid>
             </>
         ))}
-    
-        </Grid>
     </Card>
+    </Grid>
     </>
     );
 }
