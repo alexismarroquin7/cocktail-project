@@ -18,12 +18,12 @@ const useStyles = makeStyles({
 })
 
 const Drinks = (props) => {
-    const { fetchDrinks } = props;
+    const { fetchDrinks, drinkName } = props;
 
     const classes = useStyles();
     
     useEffect(() => {
-        fetchDrinks(`margarita`);
+        fetchDrinks(drinkName);
     }, [fetchDrinks]);
 
     return (

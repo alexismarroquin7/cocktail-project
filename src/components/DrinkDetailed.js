@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 //route
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 //store
 import { connect } from "react-redux";
@@ -46,8 +46,6 @@ const DrinkDetailed = props => {
     useEffect(() => {
         fetchDrink(id);
     }, [fetchDrink]);
-
-
 
     return (
     <>
