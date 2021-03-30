@@ -55,7 +55,7 @@ const DrinkDetailed = props => {
         ? (<LoadingDrinkDetailed />)
         
         : drink.map(item => (
-            <>
+            <React.Fragment key={id}>
             <Grid key={id} container direction="row" justify="center" alignItems="center">
             <CardActionArea className={size.width < 500 ? classes.cardActionArea : classes.cardActionAreaLg}>
                 <img src={item.strDrinkThumb} alt={item.strDrink} className={size.width < 500 ? classes.img : classes.imgLg}/>
@@ -76,7 +76,7 @@ const DrinkDetailed = props => {
                 </Grid>
             </CardContent>
             </Grid>
-            </>
+            </React.Fragment>
         ))}
     </Card>
     </Grid>
