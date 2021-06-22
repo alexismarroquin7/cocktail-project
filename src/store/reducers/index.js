@@ -1,4 +1,10 @@
-import {FETCH_DRINKS_START, FETCH_DRINKS_SUCCESS, FETCH_DRINKS_BY_ID_SUCCESS, FETCH_DRINKS_FAIL} from "../actions";
+import {
+  FETCH_DRINKS_START, 
+  FETCH_DRINKS_SUCCESS, 
+  FETCH_DRINKS_BY_ID_SUCCESS, 
+  FETCH_DRINKS_BY_ID_FAIL,
+  FETCH_DRINKS_FAIL
+} from "../actions";
 
 const initialState = {
     drinkName: 'margarita',
@@ -15,7 +21,7 @@ export const reducer = (state = initialState, action) => {
                 isLoading: true
             }
         case FETCH_DRINKS_SUCCESS:
-            if(action.payload.drinksData === null){
+            if(!action.payload.drinksData){
                 return {
                     ...state,
                     drinks: [],
@@ -31,7 +37,7 @@ export const reducer = (state = initialState, action) => {
                 drinkName: action.payload.drinkName
             }
         case FETCH_DRINKS_BY_ID_SUCCESS:
-            if(action.payload.drinksData === null){
+            if(!action.payload.drinksData){
                 return {
                     ...state,
                     drinks: [],
