@@ -30,7 +30,7 @@ const HomePage = () => {
     >
         <Typography variant="h3" className={classes.mainHeader}>Search from TheCocktailDB API</Typography>
         <Button className={classes.button} variant="contained"><a className={classes.aTag} href="https://www.thecocktaildb.com/" target="blank">About the API</a></Button>
-        <Button variant="contained" onClick={() => push("/search")}>Go to search</Button>
+        <Button variant="contained" onClick={() => push("/search")}>Search for drinks</Button>
     </Grid>
     </>
     );
