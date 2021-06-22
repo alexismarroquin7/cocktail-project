@@ -39,17 +39,21 @@ export const fetchDrink = id => async dispatch => {
           drinksData: drinks
         }
       });
+
     } else {
       dispatch({
         type: FETCH_DRINKS_BY_ID_FAIL,
         payload: {
-          drinksData: drinks
+          error: `No drink of id ${id} was found`
         }
       });
     }
 
   } catch (err) {
-    console.log(err.response);
-    dispatch({ type: FETCH_DRINKS_BY_ID_FAIL, payload: '404 Error' })
+    dispatch({
+      type: FETCH_DRINKS_BY_ID_FAIL, 
+      payload: 'An error occured with the server'
+    });
+  
   }
 }

@@ -38,23 +38,22 @@ const useStyles = makeStyles({
 
 const DrinkDetailed = props => {
     
-    const { fetchDrink, drink, isLoading } = props;
+    const { fetchDrink, drink, isLoading, error } = props;
     const { id } = useParams();
     const size = useWindowSize();
     const classes = useStyles();
 
     useEffect(() => {
-        fetchDrink(id);
+      fetchDrink(id);
     }, [fetchDrink]);
 
     return (
     <>
     <Grid container direction="column" alignItems="center">
+    {error && (<Typography variant="h5">{error}</Typography>)}
+    {isLoading && (<LoadingDrinkDetailed />)}
     <Card>
-        {isLoading 
-        ? (<LoadingDrinkDetailed />)
-        
-        : drink.map(item => (
+        {!isLoading && drink.map(item => (
             <React.Fragment key={id}>
             <Grid key={id} container direction="row" justify="center" alignItems="center">
             <CardActionArea className={size.width < 500 ? classes.cardActionArea : classes.cardActionAreaLg}>
@@ -85,16 +84,17 @@ const DrinkDetailed = props => {
 }
 
 const mapStateToProps = state => {
-    return {
-        drink: state.drinks,
-        isLoading: state.isLoading
-    }
+  return {
+    drink: state.drinks,
+    isLoading: state.isLoading,
+    error: state.error
+  }
 }
  
 const mapDispatchToProps = () => {
-    return {
-        fetchDrink
-    }
+  return {
+    fetchDrink
+  }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps())(DrinkDetailed);
