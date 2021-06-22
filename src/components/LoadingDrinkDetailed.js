@@ -7,7 +7,7 @@ const LoadingDrinkDetailed = () => {
     return (
     <>
     <CardContent>
-            <Typography variant="h5">Loading Drink...</Typography>
+      <Typography variant="h5">Loading Drink...</Typography>
     </CardContent>
     </>
     );
