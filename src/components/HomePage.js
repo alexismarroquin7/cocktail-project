@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import { Grid, Typography, Button, makeStyles } from "@material-ui/core";
@@ -18,22 +18,22 @@ const useStyles = makeStyles({
   
 
 const HomePage = () => {
+  
+  useEffect(() => {
     
-    const { push } = useHistory();
-    const classes = useStyles();
+  }, []);
+  
+  const { push } = useHistory();
+  const classes = useStyles();
 
-    return (
-    <>
-    <Grid container
-        direction="column"
-        alignItems="center"
-    >
-        <Typography variant="h3" className={classes.mainHeader}>Search from TheCocktailDB API</Typography>
-        <Button className={classes.button} variant="contained"><a className={classes.aTag} href="https://www.thecocktaildb.com/" target="blank">About the API</a></Button>
-        <Button variant="contained" onClick={() => push("/search")}>Search for drinks</Button>
-    </Grid>
-    </>
-    );
+  return (
+  <>
+  <Grid container direction="column" alignItems="center">
+    <Typography variant="h3" className={classes.mainHeader}>Search from TheCocktailDB API</Typography>
+    <Button className={classes.button} variant="contained"><a className={classes.aTag} href="https://www.thecocktaildb.com/" target="blank">About the API</a></Button>
+    <Button variant="contained" onClick={() => push("/search")}>Search for drinks</Button>
+  </Grid>
+  </>);
 }
 
 export default HomePage;

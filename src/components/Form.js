@@ -61,7 +61,7 @@ const Form = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        drinkName: state.drinkName
+        drinkName: state.drink.drinkName
     }
 }
 
