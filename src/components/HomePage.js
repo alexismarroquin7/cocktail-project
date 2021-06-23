@@ -39,8 +39,12 @@ const HomePage = () => {
   const { push } = useHistory();
   const classes = useStyles();
   
-  useEffect(async() => {
-    await dispatch(fetchRandomDrink());
+  useEffect(() => {
+    const handleFetchRandomDrink = async () => {
+      await dispatch(fetchRandomDrink());
+    }
+
+    handleFetchRandomDrink();
   }, []);
   console.log(drinks)
   return (<>
