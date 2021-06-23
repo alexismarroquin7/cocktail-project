@@ -46,7 +46,7 @@ const HomePage = () => {
 
     handleFetchRandomDrink();
   }, []);
-  console.log(drinks)
+  
   return (<>
   <Grid container direction="column" alignItems="center">
     <Typography variant="h3" className={classes.mainHeader}>Search from TheCocktailDB API</Typography>
