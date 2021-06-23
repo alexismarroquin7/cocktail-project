@@ -12,7 +12,8 @@ import { fetchRandomDrink } from "../store";
 import LoadingDrinkDetailed from "./LoadingDrinkDetailed";
 
 // style:
-import { Grid, Typography, Button, Card, CardContent, makeStyles } from "@material-ui/core";
+import { Grid, Typography, Button, makeStyles } from "@material-ui/core";
+import Drink from "./Drink";
 
 const useStyles = makeStyles({
   mainHeader: {
@@ -38,19 +39,22 @@ const HomePage = () => {
   const { push } = useHistory();
   const classes = useStyles();
   
-  useEffect(() => dispatch(fetchRandomDrink()), []);
-  
+  useEffect(async() => {
+    await dispatch(fetchRandomDrink());
+  }, []);
+  console.log(drinks)
   return (<>
   <Grid container direction="column" alignItems="center">
     <Typography variant="h3" className={classes.mainHeader}>Search from TheCocktailDB API</Typography>
     <Button className={classes.button} variant="contained"><a className={classes.aTag} href="https://www.thecocktaildb.com/" target="blank">About the API</a></Button>
-    <Button variant="contained" onClick={() => push("/search")}>Search for drinks</Button>
+    <Button variant="contained" onClick={() => push("/search")}>Search for a drink</Button>
       {error && (
         <Typography>{error}</Typography>
       )}
       {isLoading && (
         <LoadingDrinkDetailed />
       )}
+      {drinks.length !== 0 && <Drink drink={drinks[0]} />}
   </Grid>
   </>);
 }

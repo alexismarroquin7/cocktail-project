@@ -74,13 +74,14 @@ export const fetchRandomDrink = () => async dispatch => {
     dispatch({
       type: FETCH_RANDOM_DRINK_SUCCESS,
       payload: {
-        drinksData: drinks 
+        drinksData: drinks
       }
     });
 
   } catch (err) {
     dispatch({
-      type: FETCH_RANDOM_DRINK_FAIL 
+      type: FETCH_RANDOM_DRINK_FAIL,
+      error: err.response.message
     });
   }
 }
