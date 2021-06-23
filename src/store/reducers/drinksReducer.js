@@ -3,14 +3,17 @@ import {
   FETCH_DRINKS_SUCCESS, 
   FETCH_DRINKS_BY_ID_SUCCESS, 
   FETCH_DRINKS_BY_ID_FAIL,
-  FETCH_DRINKS_FAIL
+  FETCH_DRINKS_FAIL,
+  FETCH_RANDOM_DRINK_START,
+  FETCH_RANDOM_DRINK_SUCCESS,
+  FETCH_RANDOM_DRINK_FAIL
 } from "../actions";
 
 const initialState = {
-    drinkName: 'margarita',
-    drinks: [],
-    isLoading: false,
-    error: ''
+  drinkName: 'margarita',
+  drinks: [],
+  isLoading: false,
+  error: ''
 }
 
 const reducer = (state = initialState, action) => {
@@ -61,6 +64,28 @@ const reducer = (state = initialState, action) => {
         error: action.payload
       };
     
+    case FETCH_RANDOM_DRINK_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: ''
+      }
+    
+    case FETCH_RANDOM_DRINK_SUCCESS:
+      return {
+        ...state,
+        drinkName: '',
+        drinks: action.payload.drinksData,
+        isLoading: false,
+        error: ''
+      }
+    
+    case FETCH_RANDOM_DRINK_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload.error
+      }
     default:
       return state;
   }

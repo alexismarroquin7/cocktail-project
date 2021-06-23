@@ -70,9 +70,13 @@ export const fetchRandomDrink = () => async dispatch => {
   });
   
   try {
-    const res = await axiosInstance().get(`/api/json/v1/1/random.php`);
-    console.log(res);
-    dispatch({ type: FETCH_RANDOM_DRINK_SUCCESS });
+    const { data: { drinks } } = await axiosInstance().get(`/api/json/v1/1/random.php`);
+    dispatch({
+      type: FETCH_RANDOM_DRINK_SUCCESS,
+      payload: {
+        drinksData: drinks 
+      }
+    });
 
   } catch (err) {
     dispatch({
