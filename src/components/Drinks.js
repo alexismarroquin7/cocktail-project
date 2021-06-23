@@ -23,7 +23,7 @@ const Drinks = (props) => {
     const classes = useStyles();
     
     useEffect(() => {
-        fetchDrinks(drinkName);
+      fetchDrinks(drinkName);
     }, [fetchDrinks]);
 
     return (
@@ -50,10 +50,10 @@ const Drinks = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        drinks: state.drinks,
-        isLoading: state.isLoading,
-        error: state.error,
-        drinkName: state.drinkName
+        drinks: state.drink.drinks,
+        isLoading: state.drink.isLoading,
+        error: state.drink.error,
+        drinkName: state.drink.drinkName
     }
 }
 

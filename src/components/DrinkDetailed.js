@@ -85,9 +85,9 @@ const DrinkDetailed = props => {
 
 const mapStateToProps = state => {
   return {
-    drink: state.drinks,
-    isLoading: state.isLoading,
-    error: state.error
+    drink: state.drink.drinks,
+    isLoading: state.drink.isLoading,
+    error: state.drink.error
   }
 }
  

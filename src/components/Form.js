@@ -46,7 +46,7 @@ const Form = (props) => {
         <TextField 
             className={classes.textField}
             label="Enter a drink name:"
-            helperText={`i.e. '${props.drinkName}'`}
+            helperText={`i.e. '${props.drinkName ? props.drinkName : 'margarita'}'`}
             type="text"
             value={searchTerm}
             onChange={handleChange}
@@ -61,7 +61,7 @@ const Form = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        drinkName: state.drinkName
+        drinkName: state.drink.drinkName
     }
 }
 

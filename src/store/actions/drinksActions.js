@@ -1,15 +1,21 @@
-import axios from "axios";
+// import axios from "axios";
+import { axiosInstance } from "../../utils/axiosInstance";
 
-export const FETCH_DRINKS_START = "FETCH_DRINKS_START"
-export const FETCH_DRINKS_SUCCESS = "FETCH_DRINKS_SUCCESS"
-export const FETCH_DRINKS_BY_ID_SUCCESS = "FETCH_DRINKS_BY_ID_SUCCESS"
-export const FETCH_DRINKS_BY_ID_FAIL = "FETCH_DRINKS_BY_ID_FAIL"
-export const FETCH_DRINKS_FAIL = "FETCH_DRINKS_FAIL"
+export const FETCH_DRINKS_START = "FETCH_DRINKS_START";
+export const FETCH_DRINKS_SUCCESS = "FETCH_DRINKS_SUCCESS";
+export const FETCH_DRINKS_FAIL = "FETCH_DRINKS_FAIL";
+
+export const FETCH_DRINKS_BY_ID_SUCCESS = "FETCH_DRINKS_BY_ID_SUCCESS";
+export const FETCH_DRINKS_BY_ID_FAIL = "FETCH_DRINKS_BY_ID_FAIL";
+
+export const FETCH_RANDOM_DRINK_START = "FETCH_RANDOM_DRINK_START";
+export const FETCH_RANDOM_DRINK_SUCCESS = "FETCH_RANDOM_DRINK_SUCCESS";
+export const FETCH_RANDOM_DRINK_FAIL = "FETCH_RANDOM_DRINK_FAIL";
 
 export const fetchDrinks = drinkName => async dispatch => {
   dispatch({ type: FETCH_DRINKS_START });
   try {
-    const res = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drinkName}`);
+    const res = await axiosInstance().get(`/api/json/v1/1/search.php?s=${drinkName}`);
 
     dispatch({
       type: FETCH_DRINKS_SUCCESS,
@@ -30,7 +36,7 @@ export const fetchDrinks = drinkName => async dispatch => {
 export const fetchDrink = id => async dispatch => {
   dispatch({ type: FETCH_DRINKS_START });
   try {
-    const { data: { drinks } } = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+    const { data: { drinks } } = await axiosInstance().get(`/api/json/v1/1/lookup.php?i=${id}`);
     
     if(drinks){
       dispatch({
@@ -55,5 +61,27 @@ export const fetchDrink = id => async dispatch => {
       payload: 'An error occured with the server'
     });
   
+  }
+}
+
+export const fetchRandomDrink = () => async dispatch => {
+  dispatch({
+    type: FETCH_RANDOM_DRINK_START 
+  });
+  
+  try {
+    const { data: { drinks } } = await axiosInstance().get(`/api/json/v1/1/random.php`);
+    dispatch({
+      type: FETCH_RANDOM_DRINK_SUCCESS,
+      payload: {
+        drinksData: drinks
+      }
+    });
+
+  } catch (err) {
+    dispatch({
+      type: FETCH_RANDOM_DRINK_FAIL,
+      error: err.response.message
+    });
   }
 }
